@@ -113,5 +113,15 @@ public class BlockudockuTest {
         Assert.assertEquals(game.points, 120);
     }
 
+    public void blockTest() {
+        Blockudocku game = new Blockudocku();
+        Assert.assertEquals(game.points, 0);
+        game.placePiece(Blockudocku.Piece.D, 0, 0);
+        game.placePiece(Blockudocku.Piece.D, 1, 0);
+        game.placePiece(Blockudocku.Piece.D, 2, 0);
+        game.validateBlocks();
+        Assert.assertEquals(game.points, 150);
+    }
+
 
 }

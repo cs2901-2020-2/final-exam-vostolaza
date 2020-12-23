@@ -102,35 +102,6 @@ public class Blockudocku {
         return res;
     }
 
-    public void validateHorizontal(){
-        for (int i = 0; i < 9; i++){
-            boolean line = true;
-            for (int j = 0; j < 9; j++){
-                if (board[i][j] == 0){
-                    line = false;
-                    break;
-                }
-            }
-            if (line)
-                points += 120;
-        }
-    }
-
-    public void validateVertical(){
-        for (int i = 0; i < 9; i++){
-            boolean line = true;
-            for (int j = 0; j < 9; j++){
-                if (board[j][i] == 0){
-                    line = false;
-                    break;
-                }
-            }
-            if (line)
-                points += 120;
-        }
-    }
-
-
     public Boolean placePiece(Piece piece, int x, int y) {
         if (Boolean.FALSE.equals(validatePlacement(piece, x, y))) return false;
 
@@ -162,4 +133,53 @@ public class Blockudocku {
         }
         return true;
     }
+
+    public void validateHorizontal(){
+        for (int i = 0; i < 9; i++){
+            boolean line = true;
+            for (int j = 0; j < 9; j++){
+                if (board[i][j] == 0){
+                    line = false;
+                    break;
+                }
+            }
+            if (line)
+                points += 120;
+        }
+    }
+
+    public void validateVertical(){
+        for (int i = 0; i < 9; i++){
+            boolean line = true;
+            for (int j = 0; j < 9; j++){
+                if (board[j][i] == 0){
+                    line = false;
+                    break;
+                }
+            }
+            if (line)
+                points += 120;
+        }
+    }
+
+    public void validateBlocks() {
+        for (int m = 0; m < 9; m+=3){
+            for (int n = 0; n < 9; n+=3){
+                boolean block = true;
+                for (int i = 0; i < 3; i++){
+                    for (int j = 0; j < 3; j++){
+                        if (board[i+m][j+n] == 0){
+                            block = false;
+                            break;
+                        }
+                    }
+                    if (Boolean.FALSE.equals(block)) break;
+                }
+                if (block)
+                    points += 150;
+            }
+        }
+
+    }
+
 }
