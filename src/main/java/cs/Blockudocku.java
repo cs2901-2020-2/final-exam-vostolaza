@@ -1,5 +1,8 @@
 package cs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Blockudocku {
     int [][] board;
     Boolean gameOver = false;
@@ -131,10 +134,37 @@ public class Blockudocku {
                 placeH(x, y);
                 break;
         }
+        checkForPoints();
         return true;
     }
 
-    public void validateHorizontal(){
+    public void clearHorizontal(List<Integer> toClear){
+        for (int row : toClear){
+            for (int i = 0; i < 9; i++)
+                board[row][i] = 0;
+        }
+    }
+
+    public void clearVertical(List<Integer> toClear){
+        for (int col : toClear){
+            for (int i = 0; i < 9; i++)
+                board[i][col] = 0;
+        }
+    }
+
+    public void checkForPoints(){
+        List<Integer> toClearH = validateHorizontal();
+        List<Integer> toClearV = validateVertical();
+        validateBlocks();
+
+        if (Boolean.FALSE.equals(toClearH.isEmpty()))
+            clearHorizontal(toClearH);
+        if (Boolean.FALSE.equals(toClearV.isEmpty()))
+            clearVertical(toClearV);
+    }
+
+    public List<Integer> validateHorizontal(){
+        List<Integer> toDelete = new ArrayList<>();
         for (int i = 0; i < 9; i++){
             boolean line = true;
             for (int j = 0; j < 9; j++){
@@ -143,12 +173,16 @@ public class Blockudocku {
                     break;
                 }
             }
-            if (line)
+            if (line){
                 points += 120;
+                toDelete.add(i);
+            }
         }
+        return toDelete;
     }
 
-    public void validateVertical(){
+    public List<Integer> validateVertical(){
+        List<Integer> toDelete = new ArrayList<>();
         for (int i = 0; i < 9; i++){
             boolean line = true;
             for (int j = 0; j < 9; j++){
@@ -157,9 +191,12 @@ public class Blockudocku {
                     break;
                 }
             }
-            if (line)
+            if (line){
                 points += 120;
+                toDelete.add(i);
+            }
         }
+        return toDelete;
     }
 
     public void validateBlocks() {

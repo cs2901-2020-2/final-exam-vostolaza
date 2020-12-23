@@ -97,19 +97,21 @@ public class BlockudockuTest {
         Blockudocku game = new Blockudocku();
         Assert.assertEquals(game.points, 0);
         game.placePiece(Blockudocku.Piece.D, 0, 0);
+        Assert.assertEquals(game.validatePlacement(Blockudocku.Piece.D,0,0), Boolean.FALSE);
         game.placePiece(Blockudocku.Piece.D, 0, 3);
         game.placePiece(Blockudocku.Piece.D, 0, 6);
-        game.validateVertical();
         Assert.assertEquals(game.points, 120);
+        Assert.assertEquals(game.validatePlacement(Blockudocku.Piece.D,0,0), Boolean.TRUE);
     }
 
     public void horizontalTest(){
         Blockudocku game = new Blockudocku();
         Assert.assertEquals(game.points, 0);
         game.placePiece(Blockudocku.Piece.C, 2, 0);
+        Assert.assertEquals(game.validatePlacement(Blockudocku.Piece.C, 2,0), Boolean.FALSE);
         game.placePiece(Blockudocku.Piece.C, 5, 0);
         game.placePiece(Blockudocku.Piece.C, 8, 0);
-        game.validateHorizontal();
+        Assert.assertEquals(game.validatePlacement(Blockudocku.Piece.C, 2,0), Boolean.TRUE);
         Assert.assertEquals(game.points, 120);
     }
 
@@ -119,7 +121,6 @@ public class BlockudockuTest {
         game.placePiece(Blockudocku.Piece.D, 0, 0);
         game.placePiece(Blockudocku.Piece.D, 1, 0);
         game.placePiece(Blockudocku.Piece.D, 2, 0);
-        game.validateBlocks();
         Assert.assertEquals(game.points, 150);
     }
 
