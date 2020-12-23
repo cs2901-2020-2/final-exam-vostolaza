@@ -83,5 +83,35 @@ public class BlockudockuTest {
         Assert.assertEquals(validate, Boolean.FALSE);
     }
 
+    public void doublePlacementTest(){
+        Blockudocku game = new Blockudocku();
+        Boolean validate = game.validatePlacement(Blockudocku.Piece.H, 2,2);
+        Assert.assertEquals(validate, Boolean.TRUE);
+        Boolean insertion = game.placePiece(Blockudocku.Piece.H, 2, 2);
+        Assert.assertEquals(insertion, Boolean.TRUE);
+        insertion = game.placePiece(Blockudocku.Piece.H, 2, 2);
+        Assert.assertEquals(insertion, Boolean.FALSE);
+    }
+
+    public void verticalTest(){
+        Blockudocku game = new Blockudocku();
+        Assert.assertEquals(game.points, 0);
+        game.placePiece(Blockudocku.Piece.D, 0, 0);
+        game.placePiece(Blockudocku.Piece.D, 0, 3);
+        game.placePiece(Blockudocku.Piece.D, 0, 6);
+        game.validateVertical();
+        Assert.assertEquals(game.points, 120);
+    }
+
+    public void horizontalTest(){
+        Blockudocku game = new Blockudocku();
+        Assert.assertEquals(game.points, 0);
+        game.placePiece(Blockudocku.Piece.C, 2, 0);
+        game.placePiece(Blockudocku.Piece.C, 5, 0);
+        game.placePiece(Blockudocku.Piece.C, 8, 0);
+        game.validateHorizontal();
+        Assert.assertEquals(game.points, 120);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package cs;
 public class Blockudocku {
     int [][] board;
     Boolean gameOver = false;
+    int points = 0;
     enum Piece {
         A, B, C, D, E, F, G, H
     }
@@ -71,33 +72,64 @@ public class Blockudocku {
 
 
     public Boolean validatePlacement(Piece piece, int x, int y) {
+        boolean res = false;
         switch (piece) {
             case A:
-                return board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1 && board[y+2][x+1] != 1 && board[y+2][x+2] != 1;
-
+                res = board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1 && board[y+2][x+1] != 1 && board[y+2][x+2] != 1;
+                break;
             case B:
-                return board[y][x] != 1 && board[y][x-1] != 1 && board[y][x-2] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1;
-
+                res = board[y][x] != 1 && board[y][x-1] != 1 && board[y][x-2] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1;
+                break;
             case C:
-                return board[y][x] != 1 && board[y][x-1] != 1 && board[y][x-2] != 1;
-
+                res = board[y][x] != 1 && board[y][x-1] != 1 && board[y][x-2] != 1;
+                break;
             case D:
-                return board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1;
-
+                res = board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1;
+                break;
             case E:
-                return board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x-1] != 1 && board[y+2][x] != 1 && board[y+2][x+1] != 1;
-
+                res = board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x-1] != 1 && board[y+2][x] != 1 && board[y+2][x+1] != 1;
+                break;
             case F:
-                return board[y][x] != 1 && board[y][x-1] != 1 && board[y][x-2] != 1 && board[y+1][x-1] != 1 && board[y+2][x-1] != 1;
-
+                res = board[y][x] != 1 && board[y][x-1] != 1 && board[y][x-2] != 1 && board[y+1][x-1] != 1 && board[y+2][x-1] != 1;
+                break;
             case G:
-                return board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1 && board[y+2][x+1] != 1;
-
+                res = board[y][x] != 1 && board[y+1][x] != 1 && board[y+2][x] != 1 && board[y+2][x+1] != 1;
+                break;
             case H:
-                return board[y][x] != 1 && board[y][x-1] != 1 && board[y+1][x-1] != 1 && board[y+2][x-1] != 1;
+                res = board[y][x] != 1 && board[y][x-1] != 1 && board[y+1][x-1] != 1 && board[y+2][x-1] != 1;
+                break;
         }
-        return false;
+        return res;
     }
+
+    public void validateHorizontal(){
+        for (int i = 0; i < 9; i++){
+            boolean line = true;
+            for (int j = 0; j < 9; j++){
+                if (board[i][j] == 0){
+                    line = false;
+                    break;
+                }
+            }
+            if (line)
+                points += 120;
+        }
+    }
+
+    public void validateVertical(){
+        for (int i = 0; i < 9; i++){
+            boolean line = true;
+            for (int j = 0; j < 9; j++){
+                if (board[j][i] == 0){
+                    line = false;
+                    break;
+                }
+            }
+            if (line)
+                points += 120;
+        }
+    }
+
 
     public Boolean placePiece(Piece piece, int x, int y) {
         if (Boolean.FALSE.equals(validatePlacement(piece, x, y))) return false;
